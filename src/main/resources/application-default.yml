@@ -1,0 +1,37 @@
+server:
+  port: 8084
+
+spring:
+  datasource:
+    username: irs
+    password: secret4irs
+    url: jdbc:mariadb://localhost:3306/team_mood_api_db
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: validate
+  data:
+    elasticsearch:
+      cluster-nodes: localhost:9300
+  profiles:
+   active: dev
+cors:
+  allowed:
+   origins: ec2-52-66-113-31.ap-south-1.compute.amazonaws.com
+   methods: GET,POST,PUT,DELETE
+logging:
+  level:
+   root: info
+  com:
+   dbs:
+   app: error
+   app: info
+  console: off
+  pattern:
+   console: "%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg%n"
+   file: "%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n"
+  path: logs
+  file: "${logging.path}/log.log"
